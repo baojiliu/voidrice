@@ -70,7 +70,7 @@ alias \
 	profile='v ~/.config/shell/profile && source ~/.config/shell/profile' \
 	mi="${GOPATH}/src/dsers.com/mgnoberlo-core-api" \
 	mj="${GOPATH}/src/dsers.com/mgnoberlo-core-job" \
-	pb='cd $HOME/blog && git add . && git commit -m ":pencil:" && git push ' \
+	pb='cd $HOME/Sync/blog && git add . && git commit -m ":pencil:" && git push ' \
 	np="new_post" \
 	m4v="merge_mp4_videos"
 
@@ -81,5 +81,5 @@ function merge_mp4_videos() {
 	ffmpeg -f concat -safe 0 -i $1 -c copy $2
 }
 function new_post() {
-	cd $HOME/blog/ && hugo new content/posts/$1.md && vim content/posts/$1.md
+	cd $HOME/Sync/blog/ && hugo new content/posts/$1.md && vim content/posts/$1.md
 }
