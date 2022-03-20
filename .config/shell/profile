@@ -9,11 +9,13 @@
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 
 unsetopt PROMPT_SP
+export PEXELS_API_TOKEN='563492ad6f9170000100000189bcc04400b54b629cc8b419f1bd717c'
+
 
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="google-chrome-stable"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -36,6 +38,9 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+export GO111MODULE="on"
+export GOPRIVATE=g.dsers.com
+export PATH="$PATH:$GOPATH/bin"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
@@ -148,7 +153,7 @@ if pacman -Qs libxft-bgra >/dev/null 2>&1; then
 else
 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
 Please run:
-	\033[32myay -S libxft-bgra-git\033[0m
+	\033[32mparu -S libxft-bgra-git\033[0m
 and replace \`libxft\`. Afterwards, you may start the graphical server by running \`startx\`."
 fi
 

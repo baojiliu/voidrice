@@ -7,9 +7,10 @@
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot; do
 	alias $command="sudo $command"
-done; unset command
+done
+unset command
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \
@@ -45,7 +46,40 @@ alias \
 	z="zathura"
 
 alias \
-	lf="lfub" \
 	magit="nvim -c MagitOnly" \
 	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
-	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
+	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
+
+alias \
+	gt="${GOPATH}/src/github.com/baojiliu/test" \
+	ev="vim $HOME/.config/nvim/init.vim" \
+	api="${GOPATH}/src/dsers.com/dsers_api" \
+	common="${GOPATH}/src/dsers.com/dsers_common" \
+	shopify="${GOPATH}/src/dsers.com/shopify" \
+	devops="${GOPATH}/src/dsers.com/devops" \
+	flow="${GOPATH}/src/dsers.com/develop/flow" \
+	dprohook="${GOPATH}/src/dsers.com/dpro-hook" \
+	dsers="${GOPATH}/src/dsers.com" \
+	devmysql="mycli -D dev" \
+	af="apifox --force-device-scale-factor=1.7" \
+	mp="scrcpy" \
+	sp="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -" \
+	wx="/opt/apps/com.qq.weixin.deepin/files/run.sh" \
+	rt="QT_SCREEN_SCALE_FACTORS=2 robo3t" \
+	sn='v ~/.config/nvim/plugged/vim-go/gosnippets/UltiSnips/go.snippets' \
+	profile='v ~/.config/shell/profile && source ~/.config/shell/profile' \
+	mi="${GOPATH}/src/dsers.com/mgnoberlo-core-api" \
+	mj="${GOPATH}/src/dsers.com/mgnoberlo-core-job" \
+	pb='cd $HOME/blog && git add . && git commit -m ":pencil:" && git push ' \
+	np="new_post" \
+	m4v="merge_mp4_videos"
+
+function replace_files() {
+	find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/$1/$2/g'
+}
+function merge_mp4_videos() {
+	ffmpeg -f concat -safe 0 -i $1 -c copy $2
+}
+function new_post() {
+	cd $HOME/blog/ && hugo new content/posts/$1.md && vim content/posts/$1.md
+}
