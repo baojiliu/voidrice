@@ -35,6 +35,8 @@ let g:go_addtags_transform = 'camelcase'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'mileszs/ack.vim'
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 cnoreabbrev fzf FZF
