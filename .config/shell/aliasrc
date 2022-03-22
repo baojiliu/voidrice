@@ -52,24 +52,23 @@ alias \
 
 alias \
 	gt="${GOPATH}/src/github.com/baojiliu/test" \
-	ev="vim $HOME/.config/nvim/init.vim" \
+	dsers="${GOPATH}/src/dsers.com" \
 	api="${GOPATH}/src/dsers.com/dsers_api" \
 	common="${GOPATH}/src/dsers.com/dsers_common" \
 	shopify="${GOPATH}/src/dsers.com/shopify" \
 	devops="${GOPATH}/src/dsers.com/devops" \
 	flow="${GOPATH}/src/dsers.com/develop/flow" \
 	dprohook="${GOPATH}/src/dsers.com/dpro-hook" \
-	dsers="${GOPATH}/src/dsers.com" \
+	mi="${GOPATH}/src/dsers.com/mgnoberlo-core-api" \
+	mj="${GOPATH}/src/dsers.com/mgnoberlo-core-job" \
+	ev="vim $HOME/.config/nvim/init.vim" \
 	devmysql="mycli -D dev" \
 	af="apifox --force-device-scale-factor=1.7" \
-	mp="scrcpy" \
 	sp="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -" \
 	wx="/opt/apps/com.qq.weixin.deepin/files/run.sh" \
 	rt="QT_SCREEN_SCALE_FACTORS=2 robo3t" \
 	sn='v ~/.config/nvim/plugged/vim-go/gosnippets/UltiSnips/go.snippets' \
 	profile='v ~/.config/shell/profile && source ~/.config/shell/profile' \
-	mi="${GOPATH}/src/dsers.com/mgnoberlo-core-api" \
-	mj="${GOPATH}/src/dsers.com/mgnoberlo-core-job" \
 	pb='cd $HOME/Sync/blog && git add . && git commit -m ":pencil:" && git push ' \
 	np="new_post" \
 	m4v="merge_mp4_videos"

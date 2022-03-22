@@ -32,8 +32,14 @@ Plug 'ap/vim-css-color'
 Plug 'Chiel92/vim-autoformat'
 Plug 'fatih/vim-go'
 let g:go_addtags_transform = 'camelcase'
+autocmd FileType go nmap <leader>gr  <Plug>(go-referrers)
+autocmd FileType go nmap <leader>gi  <Plug>(go-implements)
+autocmd FileType go nmap <leader>gn  <Plug>(go-rename)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '?'
+let g:ale_completion_enabled = 1
 Plug 'mileszs/ack.vim'
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
@@ -47,8 +53,7 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let g:fzf_action = {
 			\ 'ctrl-t': 'tab split',
-			\ 'ctrl-x': 'split',
-			\ 'ctrl-v': 'vsplit' }
+			\ 'ctrl-x': 'split'}
 Plug 'Yggdroot/indentLine'
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar = '●'
@@ -65,6 +70,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'triglav/vim-visual-increment'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sickill/vim-monokai'
+Plug 'ervandew/supertab'
+Plug 'preservim/tagbar'
+nnoremap <Leader>q :TagbarToggle<CR>
 call plug#end()
 
 colorscheme monokai
@@ -200,3 +208,12 @@ function! ToggleHiddenAll()
 	endif
 endfunction
 nnoremap <leader>h :call ToggleHiddenAll()<CR>
+
+"FIXs highlight
+"GitGutter
+hi GitGutterAdd ctermfg=46 ctermbg=237
+hi GitGutterChange ctermfg=11 ctermbg=237
+hi GitGutterDelete ctermfg=1 ctermbg=237
+"ALE
+hi ALEErrorSign ctermfg=160 ctermbg=237
+hi ALEWarningSign ctermfg=227 ctermbg=237
