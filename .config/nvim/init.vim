@@ -64,7 +64,6 @@ Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
-set updatetime=10
 Plug 'easymotion/vim-easymotion'
 Plug 'triglav/vim-visual-increment'
 Plug 'jiangmiao/auto-pairs'
@@ -76,6 +75,7 @@ Plug 'stsewd/fzf-checkout.vim'
 call plug#end()
 
 colorscheme monokai
+set updatetime=10
 set title
 set bg=light
 set go=a
