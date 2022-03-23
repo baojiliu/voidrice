@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
@@ -71,7 +70,8 @@ alias \
 	profile='v ~/.config/shell/profile && source ~/.config/shell/profile' \
 	pb='cd $HOME/Sync/blog && git add . && git commit -m ":pencil:" && git push ' \
 	np="new_post" \
-	m4v="merge_mp4_videos"
+	m4v="merge_mp4_videos" \
+	pcp='git commit -m ":pencil:" && git push ' \
 
 function replace_files() {
 	find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/$1/$2/g'

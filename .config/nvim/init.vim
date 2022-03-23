@@ -217,3 +217,11 @@ hi GitGutterDelete ctermfg=1 ctermbg=237
 "ALE
 hi ALEErrorSign ctermfg=160 ctermbg=237
 hi ALEWarningSign ctermfg=227 ctermbg=237
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+nnoremap Y yg$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
