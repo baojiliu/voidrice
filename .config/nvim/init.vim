@@ -21,7 +21,6 @@ cnoreabbrev ntf NERDTreeFind
 let NERDTreeShowHidden=1
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
-Plug 'lukesmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -30,6 +29,7 @@ let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'Chiel92/vim-autoformat'
+au BufWrite * :Autoformat
 Plug 'fatih/vim-go'
 let g:go_addtags_transform = 'camelcase'
 autocmd FileType go nmap <leader>gr  <Plug>(go-referrers)
@@ -40,9 +40,9 @@ Plug 'dense-analysis/ale'
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_completion_enabled = 1
-Plug 'mileszs/ack.vim'
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+"Plug 'mileszs/ack.vim'
+"cnoreabbrev Ack Ack!
+"nnoremap <Leader>a :Ack!<Space>
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 cnoreabbrev fzf FZF
@@ -51,13 +51,11 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 "Need install the_silver_searcher for using ag command
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let $FZF_DEFAULT_OPTS='--layout=reverse'
-let g:fzf_action = {
-			\ 'ctrl-t': 'tab split',
-			\ 'ctrl-x': 'split'}
 Plug 'Yggdroot/indentLine'
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar = '●'
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+nnoremap <Leader>q :TagbarToggle<CR>
 Plug 'ryanoasis/vim-devicons'
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = '📙'
@@ -73,6 +71,7 @@ Plug 'sickill/vim-monokai'
 Plug 'ervandew/supertab'
 Plug 'preservim/tagbar'
 nnoremap <Leader>q :TagbarToggle<CR>
+Plug 'stsewd/fzf-checkout.vim'
 call plug#end()
 
 colorscheme monokai
@@ -117,13 +116,6 @@ if has('nvim')
 else
 	let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
 endif
-
-" vimling:
-nm <leader><leader>d :call ToggleDeadKeys()<CR>
-imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-nm <leader><leader>i :call ToggleIPA()<CR>
-imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
-nm <leader><leader>q :call ToggleProse()<CR>
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
