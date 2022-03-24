@@ -51,6 +51,11 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 "Need install the_silver_searcher for using ag command
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let $FZF_DEFAULT_OPTS='--layout=reverse'
+nmap <leader>b :GBranches<CR>
+nmap <leader>t :Rg<CR>
+nmap <leader>l :Lines<CR>
+nmap <leader>m :Marks<CR>
+nmap <leader>c :BCommits<CR>
 Plug 'Yggdroot/indentLine'
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar = '●'
@@ -130,15 +135,8 @@ map Q gq
 " Check file in shellcheck:
 map <leader>s :!clear && shellcheck -x %<CR>
 
-" Open my bibliography file in split
-map <leader>b :vsp<space>$BIB<CR>
-map <leader>r :vsp<space>$REFER<CR>
-
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
-
-" Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>c :w! \| !compiler "<c-r>%"<CR>
 
 " Open corresponding .pdf/.html or preview
 map <leader>p :!opout <c-r>%<CR><CR>
