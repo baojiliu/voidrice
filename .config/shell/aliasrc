@@ -61,7 +61,8 @@ alias \
 	mi="${GOPATH}/src/dsers.com/mgnoberlo-core-api" \
 	mj="${GOPATH}/src/dsers.com/mgnoberlo-core-job" \
 	ev="vim $HOME/.config/nvim/init.vim" \
-	devmysql="mycli -D dev" \
+	dm="mycli -D dev" \
+	pm="mycli -D prod" \
 	af="apifox --force-device-scale-factor=1.7" \
 	sp="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -" \
 	wx="/opt/apps/com.qq.weixin.deepin/files/run.sh" \
@@ -73,12 +74,16 @@ alias \
 	m4v="merge_mp4_videos" \
 	pcp='git commit -m ":pencil:" && git push ' \
 
-function replace_files() {
-	find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/$1/$2/g'
-}
+	function replace_files() {
+		find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/$1/$2/g'
+	}
 function merge_mp4_videos() {
 	ffmpeg -f concat -safe 0 -i $1 -c copy $2
 }
 function new_post() {
 	cd $HOME/Sync/blog/ && hugo new content/posts/$1.md && vim content/posts/$1.md
+}
+
+function todate(){
+	date -d @$1 '+%Y-%m-%d %H:%M:%S'
 }

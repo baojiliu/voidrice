@@ -29,17 +29,32 @@ let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'Chiel92/vim-autoformat'
-au BufWrite * :Autoformat
+"au BufWrite * :Autoformat
 Plug 'fatih/vim-go'
-let g:go_addtags_transform = 'camelcase'
+"let g:go_addtags_transform = 'camelcase'
 autocmd FileType go nmap <leader>gr  <Plug>(go-referrers)
 autocmd FileType go nmap <leader>gi  <Plug>(go-implements)
 autocmd FileType go nmap <leader>gn  <Plug>(go-rename)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>:GoFillStruct <CR>
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 Plug 'dense-analysis/ale'
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
-let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 0
+"let g:ale_completion_enabled = 1
 "Plug 'mileszs/ack.vim'
 "cnoreabbrev Ack Ack!
 "nnoremap <Leader>a :Ack!<Space>
@@ -73,10 +88,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'triglav/vim-visual-increment'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sickill/vim-monokai'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'preservim/tagbar'
 nnoremap <Leader>q :TagbarToggle<CR>
 Plug 'stsewd/fzf-checkout.vim'
+Plug 'MattesGroeger/vim-bookmarks'
 call plug#end()
 
 colorscheme monokai
