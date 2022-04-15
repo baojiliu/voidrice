@@ -1,5 +1,5 @@
 !! Transparency (0-1):
-*.alpha: 1
+*.alpha: 0.9
 
 Xft.dpi: 320
 
