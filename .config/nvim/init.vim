@@ -55,9 +55,6 @@ let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_set_highlights = 0
 "let g:ale_completion_enabled = 1
-"Plug 'mileszs/ack.vim'
-"cnoreabbrev Ack Ack!
-"nnoremap <Leader>a :Ack!<Space>
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 cnoreabbrev fzf FZF
@@ -79,7 +76,6 @@ nnoremap <Leader>q :TagbarToggle<CR>
 Plug 'ryanoasis/vim-devicons'
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = '📙'
-
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 Plug 'terryma/vim-multiple-cursors'
@@ -88,7 +84,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'triglav/vim-visual-increment'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sickill/vim-monokai'
-"Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 Plug 'preservim/tagbar'
 nnoremap <Leader>q :TagbarToggle<CR>
 Plug 'stsewd/fzf-checkout.vim'
