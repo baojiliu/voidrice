@@ -19,19 +19,14 @@ else
 endif
 cnoreabbrev ntf NERDTreeFind
 let NERDTreeShowHidden=1
-Plug 'junegunn/goyo.vim'
-Plug 'jreybert/vimagit'
-Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='simple'
 let g:airline_powerline_fonts = 1
 Plug 'tpope/vim-commentary'
-Plug 'ap/vim-css-color'
 Plug 'Chiel92/vim-autoformat'
 "au BufWrite * :Autoformat
 Plug 'fatih/vim-go'
-"let g:go_addtags_transform = 'camelcase'
 autocmd FileType go nmap <leader>gr  <Plug>(go-referrers)
 autocmd FileType go nmap <leader>gi  <Plug>(go-implements)
 autocmd FileType go nmap <leader>gn  <Plug>(go-rename)
@@ -50,11 +45,41 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+	inoremap <silent><expr> <c-space> coc#refresh()
+else
+	inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+	if CocAction('hasProvider', 'hover')
+		call CocActionAsync('doHover')
+	else
+		call feedkeys('K', 'in')
+	endif
+endfunction
 Plug 'dense-analysis/ale'
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_set_highlights = 0
-"let g:ale_completion_enabled = 1
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 cnoreabbrev fzf FZF
@@ -84,7 +109,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'triglav/vim-visual-increment'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sickill/vim-monokai'
-Plug 'ervandew/supertab'
 Plug 'preservim/tagbar'
 nnoremap <Leader>q :TagbarToggle<CR>
 Plug 'stsewd/fzf-checkout.vim'
@@ -119,21 +143,10 @@ set wildmode=longest,list,full
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Perform dot commands over visual blocks:
 vnoremap . :normal .<CR>
-" Goyo plugin makes text more readable when writing prose:
-map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 " Spell-check set to <leader>o, 'o' for 'orthography':
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
-
-" Nerd tree
-map <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-if has('nvim')
-	let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
-else
-	let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
-endif
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
@@ -150,28 +163,8 @@ map <leader>s :!clear && shellcheck -x %<CR>
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
 
-" Open corresponding .pdf/.html or preview
-map <leader>p :!opout <c-r>%<CR><CR>
-
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-autocmd VimLeave *.tex !texclear %
-
-" Ensure files are read as what I want:
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-map <leader>v :VimwikiIndex
-let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-autocmd BufRead,BufNewFile *.tex set filetype=tex
-
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" Enable Goyo by default for mutt writing
-autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
-autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save. & reset cursor position
 autocmd BufWritePre * let currPos = getpos(".")
@@ -193,31 +186,10 @@ if &diff
 	highlight! link DiffText MatchParen
 endif
 
-" Function for toggling the bottom statusbar:
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-	if s:hidden_all  == 0
-		let s:hidden_all = 1
-		set noshowmode
-		set noruler
-		set laststatus=0
-		set noshowcmd
-	else
-		let s:hidden_all = 0
-		set showmode
-		set ruler
-		set laststatus=2
-		set showcmd
-	endif
-endfunction
-nnoremap <leader>h :call ToggleHiddenAll()<CR>
-
 "FIXs highlight
-"GitGutter
 hi GitGutterAdd ctermfg=46 ctermbg=237
 hi GitGutterChange ctermfg=11 ctermbg=237
 hi GitGutterDelete ctermfg=1 ctermbg=237
-"ALE
 hi ALEErrorSign ctermfg=160 ctermbg=237
 hi ALEWarningSign ctermfg=227 ctermbg=237
 
